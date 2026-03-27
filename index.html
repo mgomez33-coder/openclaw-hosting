@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="es" class="h-full overflow-x-hidden">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>OpenClaw Hosting — Tu Asistente AI Personal 24/7</title>
+    <meta name="description" content="Hosting gestionado de OpenClaw. Tu propio asistente AI siempre activo, sin configuración. Desde $19/mes.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #050810;
+            --bg-secondary: #111827;
+            --bg-card: #0a0f1a;
+            --bg-card-alt: #0d1220;
+            --bg-dark: #111827;
+            --bg-elevated: #1a1f2e;
+            --text-primary: #f0f4ff;
+            --text-secondary: #8892b0;
+            --text-tertiary: #5a6480;
+            --text-muted: #5a6480;
+            --accent: #ff4d4d;
+            --accent-dark: #ef4444;
+            --divider: #111827;
+            --glass-subtle: rgba(255, 255, 255, 0.03);
+            --glass-light: rgba(255, 255, 255, 0.04);
+            --glass-medium: rgba(255, 255, 255, 0.06);
+            --glass-strong: rgba(255, 255, 255, 0.1);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        a { color: inherit; text-decoration: none; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        
+        /* Nav */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            background: rgba(5, 8, 16, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding: 16px 0;
+        }
+        nav .container {
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .logo {
+            font-size: 1.4rem; font-weight: 800; color: white;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .logo-icon { font-size: 1.6rem; }
+        nav ul { display: flex; gap: 32px; list-style: none; }
+        nav ul li a {
+            color: var(--text-secondary); font-size: 0.9rem; font-weight: 500;
+            transition: color 0.2s;
+        }
+        nav ul li a:hover { color: white; }
+        .nav-cta {
+            background: var(--accent); color: white;
+            padding: 10px 24px; border-radius: 12px;
+            font-weight: 600; font-size: 0.9rem;
+            transition: all 0.2s; border: none; cursor: pointer;
+        }
+        .nav-cta:hover { background: #ff6666; transform: translateY(-1px); }
+        
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            text-align: center; padding: 120px 24px 80px;
+            position: relative;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -200px; left: 50%; transform: translateX(-50%);
+            width: 800px; height: 800px;
+            background: radial-gradient(circle, rgba(255,77,77,0.12) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: var(--bg-card); border: 1px solid rgba(255,255,255,0.1);
+            padding: 8px 16px; border-radius: 100px;
+            font-size: 0.85rem; color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+        .hero-badge span { color: var(--accent); }
+        
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 900; line-height: 1.05;
+            margin-bottom: 24px;
+        }
+        .hero h1 .gradient {
+            background: linear-gradient(135deg, #ff4d4d, #ff8066, #ff4d4d);
+            background-size: 200% 200%;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient-shift 3s ease infinite;
+        }
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        .hero-mascot {
+            font-size: 4rem; margin-bottom: 16px;
+            animation: bounce 2s ease-in-out infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+        .hero p {
+            font-size: 1.25rem; color: var(--text-secondary);
+            max-width: 600px; margin-bottom: 40px;
+        }
+        .hero p strong { color: white; }
+        .hero-cta {
+            background: var(--accent); color: white;
+            padding: 16px 48px; border-radius: 16px;
+            font-size: 1.1rem; font-weight: 700;
+            border: none; cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 8px 32px rgba(255,77,77,0.3);
+        }
+        .hero-cta:hover {
+            background: #ff6666;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(255,77,77,0.4);
+        }
+        .hero-sub { font-size: 0.85rem; color: var(--text-muted); margin-top: 16px; }
+        
+        /* Dashboard mockup */
+        .dashboard-mock {
+            margin-top: 60px;
+            width: 100%; max-width: 900px;
+            background: var(--bg-card);
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.1);
+            overflow: hidden;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.5), 0 0 60px rgba(255,77,77,0.08);
+        }
+        .dash-header {
+            background: var(--bg-secondary);
+            padding: 12px 16px;
+            display: flex; align-items: center; gap: 8px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .dot { width: 12px; height: 12px; border-radius: 50%; }
+        .dot-r { background: #ff5f57; }
+        .dot-y { background: #febc2e; }
+        .dot-g { background: #28c840; }
+        .dash-title { margin-left: 12px; font-family: monospace; font-size: 0.8rem; color: var(--text-muted); }
+        .dash-status { margin-left: auto; display: flex; align-items: center; gap: 6px; font-size: 0.75rem; color: #28c840; }
+        .dash-status::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #28c840; }
+        .dash-body { display: flex; min-height: 350px; }
+        .dash-sidebar {
+            width: 160px; background: var(--bg-card-alt);
+            padding: 16px; border-right: 1px solid rgba(255,255,255,0.05);
+            display: flex; flex-direction: column; gap: 8px;
+        }
+        .sidebar-item {
+            display: flex; align-items: center; gap: 10px;
+            padding: 10px 12px; border-radius: 10px;
+            font-size: 0.8rem; color: var(--text-muted);
+        }
+        .sidebar-item.active {
+            background: rgba(255,77,77,0.1); color: var(--accent);
+        }
+        .sidebar-item .icon { width: 16px; height: 16px; border-radius: 4px; background: var(--bg-secondary); }
+        .sidebar-item.active .icon { background: var(--accent); }
+        .dash-main { flex: 1; padding: 24px; display: flex; flex-direction: column; }
+        .dash-msg {
+            display: flex; gap: 12px; margin-bottom: 20px;
+        }
+        .dash-avatar {
+            width: 36px; height: 36px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), #ff8866);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1rem; flex-shrink: 0;
+        }
+        .dash-bubble {
+            background: var(--bg-secondary);
+            padding: 12px 16px; border-radius: 12px;
+            border-top-left-radius: 4px;
+            display: flex; gap: 4px; align-items: center;
+        }
+        .dash-bubble span {
+            width: 6px; height: 6px; border-radius: 50%;
+            background: var(--text-muted);
+            animation: typing 1.4s infinite;
+        }
+        .dash-bubble span:nth-child(2) { animation-delay: 0.2s; }
+        .dash-bubble span:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes typing {
+            0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+            30% { transform: translateY(-4px); opacity: 1; }
+        }
+        .dash-input {
+            margin-top: auto;
+            display: flex; align-items: center; gap: 12px;
+            background: var(--bg-secondary);
+            padding: 14px 16px; border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .dash-input span { color: var(--text-muted); font-size: 0.85rem; }
+        .dash-input .send-btn {
+            margin-left: auto;
+            width: 32px; height: 32px; border-radius: 8px;
+            background: var(--accent); border: none;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer;
+        }
+        
+        /* Stats */
+        .stats { padding: 80px 24px; }
+        .stats-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px; max-width: 900px; margin: 0 auto;
+        }
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 20px; padding: 32px;
+            text-align: center;
+            position: relative; overflow: hidden;
+        }
+        .stat-card::before {
+            content: ''; position: absolute;
+            top: 0; left: 50%; transform: translateX(-50%);
+            width: 120px; height: 120px;
+            background: radial-gradient(circle, rgba(255,77,77,0.1), transparent 70%);
+        }
+        .stat-card .icon {
+            width: 48px; height: 48px; border-radius: 14px;
+            background: rgba(255,77,77,0.1);
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 16px; font-size: 1.5rem;
+        }
+        .stat-card .number {
+            font-size: 2.5rem; font-weight: 800; color: var(--accent);
+        }
+        .stat-card .label { font-size: 0.85rem; color: var(--text-muted); margin-top: 4px; }
+        .stats-quote {
+            text-align: center; margin-top: 40px;
+            font-size: 1.2rem; font-weight: 600;
+            color: rgba(255,255,255,0.6);
+        }
+        
+        /* Comparison */
+        .comparison { padding: 80px 24px; }
+        .comparison h2 {
+            text-align: center; font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-weight: 800; margin-bottom: 48px;
+        }
+        .comp-grid { display: grid; grid-template-columns: 1fr auto 1fr; gap: 24px; align-items: start; max-width: 1000px; margin: 0 auto; }
+        .comp-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 20px; padding: 32px;
+        }
+        .comp-card.dark { background: #0a0a10; border-color: rgba(255,255,255,0.04); }
+        .comp-card h3 {
+            font-size: 0.8rem; font-weight: 700; letter-spacing: 2px;
+            text-transform: uppercase; margin-bottom: 24px;
+        }
+        .comp-card.dark h3 { color: var(--accent); }
+        .comp-card h3.neutral { color: var(--text-muted); }
+        .terminal {
+            background: #0d1117; border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 12px; padding: 16px; margin-bottom: 20px;
+            font-family: monospace; font-size: 0.8rem;
+        }
+        .terminal-header { display: flex; gap: 6px; margin-bottom: 12px; }
+        .t-line { margin-bottom: 4px; }
+        .t-prompt { color: #7ee787; }
+        .t-error { color: #f85149; }
+        .t-dim { color: #8b949e; }
+        .comp-list { list-style: none; }
+        .comp-list li {
+            padding: 8px 0; color: var(--text-muted);
+            display: flex; align-items: center; gap: 8px;
+        }
+        .comp-list li.fail { color: #f85149; }
+        .comp-list li.fail::before { content: '✗'; color: #f85149; }
+        .comp-list li.ok { color: #7ee787; }
+        .comp-list li.ok::before { content: '✓'; color: #7ee787; }
+        .comp-list li.bold { font-weight: 700; color: var(--accent); }
+        .comp-list li.bold::before { content: '✓'; color: var(--accent); }
+        .comp-arrow { display: flex; align-items: center; justify-content: center; font-size: 2rem; color: var(--accent); padding-top: 100px; }
+        .comp-right h3 { color: var(--text-secondary); }
+        .comp-right p { font-size: 1.4rem; font-weight: 800; margin: 20px 0; }
+        .comp-right ul li { color: #a3b1cc; }
+        
+        /* Features */
+        .features { padding: 80px 24px; }
+        .features h2 {
+            text-align: center; font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-weight: 800; margin-bottom: 16px;
+        }
+        .features-sub { text-align: center; color: var(--text-muted); margin-bottom: 48px; }
+        .features-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px; max-width: 1100px; margin: 0 auto;
+        }
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 16px; padding: 24px;
+            transition: all 0.2s;
+        }
+        .feature-card:hover {
+            border-color: rgba(255,77,77,0.3);
+            transform: translateY(-2px);
+        }
+        .feature-icon {
+            width: 48px; height: 48px; border-radius: 12px;
+            background: var(--bg-secondary);
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 16px; font-size: 1.4rem;
+        }
+        .feature-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+        .feature-card p { font-size: 0.85rem; color: var(--text-muted); }
+        
+        /* How it works */
+        .how { padding: 80px 24px; }
+        .how h2 {
+            text-align: center; font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-weight: 800; margin-bottom: 48px;
+        }
+        .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; max-width: 900px; margin: 0 auto; }
+        .step { text-align: center; }
+        .step-num {
+            width: 56px; height: 56px; border-radius: 50%;
+            background: var(--accent); color: white;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem; font-weight: 800;
+            margin: 0 auto 20px;
+        }
+        .step h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
+        .step p { font-size: 0.85rem; color: var(--text-muted); }
+        
+        /* Pricing */
+        .pricing { padding: 80px 24px; }
+        .pricing h2 {
+            text-align: center; font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-weight: 800; margin-bottom: 16px;
+        }
+        .pricing-sub { text-align: center; color: var(--text-muted); margin-bottom: 32px; }
+        .billing-toggle {
+            display: flex; justify-content: center; gap: 8px;
+            margin-bottom: 40px;
+        }
+        .billing-toggle button {
+            padding: 8px 20px; border-radius: 100px;
+            border: none; cursor: pointer; font-size: 0.85rem; font-weight: 600;
+            transition: all 0.2s;
+        }
+        .billing-toggle .active {
+            background: var(--accent); color: white;
+        }
+        .billing-toggle button:not(.active) {
+            background: var(--bg-card); color: var(--text-muted);
+        }
+        .pricing-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px; max-width: 1100px; margin: 0 auto;
+        }
+        .price-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 20px; padding: 32px;
+            position: relative;
+        }
+        .price-card.featured {
+            border-color: rgba(255,77,77,0.4);
+            box-shadow: 0 0 40px rgba(255,77,77,0.1);
+        }
+        .price-badge {
+            position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+            background: var(--accent); color: white;
+            padding: 4px 16px; border-radius: 100px;
+            font-size: 0.7rem; font-weight: 700; letter-spacing: 1px;
+            white-space: nowrap;
+        }
+        .price-card h3 {
+            font-size: 0.8rem; font-weight: 700; letter-spacing: 2px;
+            color: var(--text-muted); margin-bottom: 8px;
+        }
+        .price-card.featured h3 { color: var(--accent); }
+        .price-card .desc { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 20px; min-height: 36px; }
+        .price {
+            display: flex; align-items: flex-end; gap: 4px;
+            margin-bottom: 4px;
+        }
+        .price .amount { font-size: 3rem; font-weight: 900; }
+        .price .period { font-size: 1rem; color: var(--text-muted); margin-bottom: 8px; }
+        .price .billed { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 24px; }
+        .price-cta {
+            width: 100%; padding: 14px; border-radius: 12px;
+            font-size: 0.95rem; font-weight: 700;
+            border: none; cursor: pointer; transition: all 0.2s;
+            margin-bottom: 24px;
+        }
+        .price-cta.primary {
+            background: var(--accent); color: white;
+        }
+        .price-cta.primary:hover { background: #ff6666; }
+        .price-cta.secondary {
+            background: rgba(255,77,77,0.1);
+            border: 1px solid rgba(255,77,77,0.2);
+            color: var(--accent);
+        }
+        .price-cta.secondary:hover { background: rgba(255,77,77,0.15); }
+        .price-features { list-style: none; }
+        .price-features li {
+            display: flex; align-items: center; gap: 8px;
+            padding: 6px 0; font-size: 0.85rem;
+        }
+        .price-features li::before {
+            content: '✓'; color: var(--accent); font-weight: 700;
+        }
+        .price-features li.dim { color: var(--text-muted); }
+        .price-features li.dim::before { color: var(--text-muted); }
+        
+        /* Testimonials */
+        .testimonials { padding: 80px 24px; overflow: hidden; }
+        .testimonials h2 {
+            text-align: center; font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-weight: 800; margin-bottom: 16px;
+        }
+        .testi-badge {
+            display: flex; justify-content: center; align-items: center; gap: 8px;
+            margin-bottom: 48px;
+        }
+        .testi-badge span {
+            width: 8px; height: 8px; border-radius: 50%; background: var(--accent);
+        }
+        .testi-badge p { color: var(--text-secondary); font-weight: 600; }
+        .marquee {
+            display: flex; gap: 16px;
+            animation: marquee 60s linear infinite;
+            width: max-content;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .testi-card {
+            width: 320px; flex-shrink: 0;
+            background: rgba(10,15,26,0.8);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 16px; padding: 24px;
+            backdrop-filter: blur(10px);
+        }
+        .testi-card:hover { border-color: rgba(255,77,77,0.3); }
+        .testi-card p {
+            font-size: 0.9rem; color: var(--text-secondary);
+            line-height: 1.7; margin-bottom: 16px;
+        }
+        .testi-card p::before { content: '"'; }
+        .testi-card p::after { content: '"'; }
+        .testi-author { display: flex; align-items: center; gap: 10px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.04); }
+        .testi-avatar {
+            width: 32px; height: 32px; border-radius: 50%;
+            background: var(--bg-secondary);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.8rem; font-weight: 700;
+        }
+        .testi-name { font-size: 0.8rem; font-weight: 600; }
+        .testi-handle { font-size: 0.7rem; color: var(--accent); }
+        
+        /* FAQ */
+        .faq { padding: 80px 24px; max-width: 700px; margin: 0 auto; }
+        .faq h2 {
+            text-align: center; font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-weight: 800; margin-bottom: 40px;
+        }
+        .faq-item {
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            padding: 20px 0;
+        }
+        .faq-item h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+        .faq-item p { font-size: 0.85rem; color: var(--text-muted); }
+        
+        /* CTA */
+        .cta {
+            padding: 100px 24px;
+            text-align: center;
+            position: relative;
+        }
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 50%; transform: translateX(-50%);
+            width: 600px; height: 400px;
+            background: radial-gradient(circle, rgba(255,77,77,0.1), transparent 70%);
+            pointer-events: none;
+        }
+        .cta h2 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 900; margin-bottom: 16px;
+        }
+        .cta p { color: var(--text-muted); margin-bottom: 32px; }
+        .cta-btn {
+            display: inline-block;
+            background: var(--accent); color: white;
+            padding: 18px 56px; border-radius: 16px;
+            font-size: 1.1rem; font-weight: 700;
+            transition: all 0.2s;
+            box-shadow: 0 8px 32px rgba(255,77,77,0.3);
+        }
+        .cta-btn:hover {
+            background: #ff6666;
+            transform: translateY(-2px);
+        }
+        
+        /* Footer */
+        footer {
+            background: #030508;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding: 40px 24px;
+        }
+        footer .container {
+            display: flex; justify-content: space-between; align-items: center;
+            flex-wrap: wrap; gap: 16px;
+        }
+        footer p { color: var(--text-muted); font-size: 0.85rem; }
+        footer a { color: var(--accent); }
+        
+        /* Animations */
+        [style*="opacity:0"] {
+            opacity: 1 !important;
+            transform: none !important;
+        }
+        
+        @media (max-width: 768px) {
+            nav ul { display: none; }
+            .comp-grid { grid-template-columns: 1fr; }
+            .comp-arrow { display: none; }
+            .steps { grid-template-columns: 1fr; }
+            .dash-sidebar { display: none; }
+            .features-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="container">
+        <a href="#" class="logo">
+            🦞 <span>OpenClaw</span> Hosting
+        </a>
+        <ul>
+            <li><a href="#features">Características</a></li>
+            <li><a href="#how">Cómo funciona</a></li>
+            <li><a href="#pricing">Precios</a></li>
+            <li><a href="#faq">FAQ</a></li>
+        </ul>
+        <button class="nav-cta">Comenzar ahora</button>
+    </div>
+</nav>
+
+<section class="hero">
+    <div class="hero-badge">
+        <span>🔥</span> Los primeros 100 usuariosget 3 meses gratis
+    </div>
+    <div class="hero-mascot">🦞</div>
+    <h1>
+        Tu Asistente AI<br>
+        <span class="gradient">Siempre Activo</span>
+    </h1>
+    <p>
+        OpenClaw es un asistente AI personal que trabaja <strong>24/7</strong>, se conecta a tus apps,
+        maneja tus tareas y nunca se toma días libres. Sin configuración, sin servidor, sin complicaciones.
+    </p>
+    <button class="hero-cta">Ejecutar OpenClaw ahora →</button>
+    <p class="hero-sub">Instala en segundos. Cancela cuando quieras.</p>
+    
+    <div class="dashboard-mock">
+        <div class="dash-header">
+            <div class="dot dot-r"></div>
+            <div class="dot dot-y"></div>
+            <div class="dot dot-g"></div>
+            <span class="dash-title">MyClaw Dashboard</span>
+            <span class="dash-status">Online</span>
+        </div>
+        <div class="dash-body">
+            <div class="dash-sidebar">
+                <div class="sidebar-item active">
+                    <div class="icon"></div> Chat
+                </div>
+                <div class="sidebar-item">
+                    <div class="icon"></div> Tareas
+                </div>
+                <div class="sidebar-item">
+                    <div class="icon"></div> Memoria
+                </div>
+                <div class="sidebar-item">
+                    <div class="icon"></div> Ajustes
+                </div>
+            </div>
+            <div class="dash-main">
+                <div class="dash-msg">
+                    <div class="dash-avatar">🦞</div>
+                    <div class="dash-bubble">
+                        <span></span><span></span><span></span>
+                    </div>
+                </div>
+                <div class="dash-input">
+                    <span>Message your OpenClaw…</span>
+                    <div class="send-btn">→</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="stats">
+    <div class="container">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="icon">⭐</div>
+                <div class="number">134k+</div>
+                <div class="label">Developers en GitHub</div>
+            </div>
+            <div class="stat-card">
+                <div class="icon">👁</div>
+                <div class="number">500M+</div>
+                <div class="label">Vistas en redes sociales</div>
+            </div>
+            <div class="stat-card">
+                <div class="icon">🚀</div>
+                <div class="number">1 Semana</div>
+                <div class="label">De cero a #1 mundial</div>
+            </div>
+        </div>
+        <p class="stats-quote">Todos quieren un OpenClaw. Casi nadie sabe cómo configurarlo.</p>
+    </div>
+</section>
+
+<section class="comparison">
+    <div class="container">
+        <h2>Por qué la mayoría nunca usa OpenClaw</h2>
+        <div class="comp-grid">
+            <div class="comp-card dark">
+                <h3 class="neutral">SIN HOSTING GESTIONADO</h3>
+                <div class="terminal">
+                    <div class="terminal-header">
+                        <div class="dot dot-r"></div>
+                        <div class="dot dot-y"></div>
+                        <div class="dot dot-g"></div>
+                    </div>
+                    <div class="t-line"><span class="t-prompt">$</span> <span class="t-dim">git clone openclaw && cd openclaw</span></div>
+                    <div class="t-line"><span class="t-prompt">$</span> <span class="t-dim">docker compose up</span></div>
+                    <div class="t-line"><span class="t-error">ERROR: port 5432 already in use</span></div>
+                    <div class="t-line"><span class="t-prompt">$</span> <span class="t-dim">pip install -r requirements.txt</span></div>
+                    <div class="t-line"><span class="t-error">ERROR: python 3.9 required, found 3.12</span></div>
+                    <div class="t-line"><span class="t-error">Build failed. 14 errors.</span></div>
+                </div>
+                <ul class="comp-list">
+                    <li class="fail">Encontrar un servidor</li>
+                    <li class="fail">Configurar el entorno</li>
+                    <li class="fail">Algo se rompe</li>
+                    <li class="bold">Abandonar</li>
+                </ul>
+            </div>
+            <div class="comp-arrow">→</div>
+            <div class="comp-card comp-right">
+                <h3>CON OPENCLAW HOSTING</h3>
+                <div class="terminal">
+                    <div class="terminal-header">
+                        <div class="dot dot-r"></div>
+                        <div class="dot dot-y"></div>
+                        <div class="dot dot-g"></div>
+                    </div>
+                    <div class="t-line"><span class="t-prompt" style="animation:pulse 2s infinite">●</span> <span class="t-dim">OpenClaw está corriendo</span></div>
+                </div>
+                <p>OpenClaw Hosting salta todo eso.</p>
+                <ul class="comp-list">
+                    <li class="ok">Sin aprender nada nuevo</li>
+                    <li class="ok">Sin mantener nada</li>
+                    <li class="ok">Sin errores de configuración</li>
+                    <li class="ok">Listo en 2 minutos</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="features" id="features">
+    <div class="container">
+        <h2>Lo que obtienes con OpenClaw Hosting</h2>
+        <p class="features-sub">Un asistente AI que trabaja en toda tu vida digital.</p>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">📧</div>
+                <h3>Automatización de Flujos</h3>
+                <p>Automatiza emails, recordatorios, agenda y tareas repetitivas — sin usar tus manos.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💻</div>
+                <h3>Control de Navegador</h3>
+                <p>Llena formularios, extrae datos, monitorea precios y navega la web como humano.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📁</div>
+                <h3>Gestión de Archivos</h3>
+                <p>Organiza, renombra, convierte y maneja archivos en toda tu máquina.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔌</div>
+                <h3>Integraciones</h3>
+                <p>Conecta Slack, Discord, GitHub, bases de datos y cualquier API.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🏠</div>
+                <h3>Control de Hogar</h3>
+                <p>Controla Home Assistant, configura automatizaciones y maneja tu smart home.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📅</div>
+                <h3>Asistente Personal</h3>
+                <p>Gestiona tu calendario, toma notas de reuniones, rastrea hábitos y maneja tareas.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎨</div>
+                <h3>Creación de Contenido</h3>
+                <p>Genera imágenes, edita videos, escribe documentos y produce activos creativos.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔍</div>
+                <h3>Herramientas de Código</h3>
+                <p>Revisa código, genera tests, refactoriza proyectos y gestiona repos automáticamente.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="how" id="how">
+    <div class="container">
+        <h2>Cómo funciona</h2>
+        <div class="steps">
+            <div class="step">
+                <div class="step-num">1</div>
+                <h3>Elige un plan</h3>
+                <p>Escoge el plan que se ajuste a tus necesidades. Todos incluyen una instancia dedicada.</p>
+            </div>
+            <div class="step">
+                <div class="step-num">2</div>
+                <h3>Nosotros configuramos</h3>
+                <p>Creamos tu instancia de OpenClaw configurada y optimizada solo para ti.</p>
+            </div>
+            <div class="step">
+                <div class="step-num">3</div>
+                <h3>Empieza a usarlo</h3>
+                <p>Sin pasos de configuración. Sin checklist. Solo entra y usa.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="pricing" id="pricing">
+    <div class="container">
+        <h2>Precios Simples y Transparentes</h2>
+        <p class="pricing-sub">Elige el plan que se ajuste a ti. Cancela cuando quieras.</p>
+        <div class="billing-toggle">
+            <button class="active">Anual <span style="background:var(--accent);color:white;padding:2px 8px;border-radius:100px;font-size:0.7rem;margin-left:4px">-16%</span></button>
+            <button>Mensual</button>
+        </div>
+        <div class="pricing-grid">
+            <div class="price-card">
+                <h3>LITE</h3>
+                <p class="desc">Para uso personal y comenzar</p>
+                <div class="price">
+                    <span class="amount">$16</span>
+                    <span class="period">/mes</span>
+                </div>
+                <p class="billed">Facturado $199/año</p>
+                <button class="price-cta secondary">Suscribirse a Lite</button>
+                <ul class="price-features">
+                    <li>Acceso instantáneo, sin configuración</li>
+                    <li>Asistente AI personal, 24/7</li>
+                    <li>Actualizaciones automáticas</li>
+                    <li>2 vCPU cores</li>
+                    <li>4 GB RAM</li>
+                    <li>40 GB SSD almacenamiento</li>
+                    <li class="dim">Totalmente privado y encriptado</li>
+                    <li class="dim">Respaldos diarios</li>
+                </ul>
+            </div>
+            <div class="price-card featured">
+                <div class="price-badge">MÁS POPULAR</div>
+                <h3>PRO</h3>
+                <p class="desc">Para usuarios avanzados que usan AI a diario</p>
+                <div class="price">
+                    <span class="amount">$33</span>
+                    <span class="period">/mes</span>
+                </div>
+                <p class="billed">Facturado $399/año</p>
+                <button class="price-cta primary">Suscribirse a Pro</button>
+                <ul class="price-features">
+                    <li>Acceso instantáneo, sin configuración</li>
+                    <li>Asistente AI personal, 24/7</li>
+                    <li>Actualizaciones automáticas</li>
+                    <li>4 vCPU cores</li>
+                    <li>8 GB RAM</li>
+                    <li>80 GB SSD almacenamiento</li>
+                    <li>Totalmente privado y encriptado</li>
+                    <li>Respaldos diarios</li>
+                    <li class="dim">Soporte prioritario</li>
+                </ul>
+            </div>
+            <div class="price-card">
+                <h3>MAX</h3>
+                <p class="desc">Para cargas pesadas y máximo rendimiento</p>
+                <div class="price">
+                    <span class="amount">$66</span>
+                    <span class="period">/mes</span>
+                </div>
+                <p class="billed">Facturado $799/año</p>
+                <button class="price-cta secondary">Suscribirse a Max</button>
+                <ul class="price-features">
+                    <li>Acceso instantáneo, sin configuración</li>
+                    <li>Asistente AI personal, 24/7</li>
+                    <li>Actualizaciones automáticas</li>
+                    <li>8 vCPU cores</li>
+                    <li>16 GB RAM</li>
+                    <li>160 GB SSD almacenamiento</li>
+                    <li>Totalmente privado y encriptado</li>
+                    <li>Respaldos diarios</li>
+                    <li>Soporte prioritario</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="testimonials">
+    <div class="container">
+        <h2>Lo que dicen los usuarios</h2>
+        <div class="testi-badge">
+            <span></span>
+            <p>10,000+ personas ya tienen su lugar reservado</p>
+            <span></span>
+        </div>
+    </div>
+    <div style="overflow:hidden;position:relative;">
+        <div style="position:absolute;left:0;top:0;bottom:0;width:60px;background:linear-gradient(to right,var(--bg-primary),transparent);z-index:1;pointer-events:none;"></div>
+        <div style="position:absolute;right:0;top:0;bottom:0;width:60px;background:linear-gradient(to left,var(--bg-primary),transparent);z-index:1;pointer-events:none;"></div>
+        <div class="marquee">
+            <div class="testi-card">
+                <p>Desde que tengo OpenClaw funcionando 24/7, mi productividad se disparó. Me maneja emails, calendarios y hasta me recuerda cosas que olvido.</p>
+                <div class="testi-author">
+                    <div class="testi-avatar">👨‍💼</div>
+                    <div>
+                        <div class="testi-name">Carlos M.</div>
+                        <div class="testi-handle">@carlos_dev</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testi-card">
+                <p>Es como tener un asistente virtual que nunca duerme. Le pido que revise mis cryptos, maneje mis tareas y siempre tiene la respuesta.</p>
+                <div class="testi-author">
+                    <div class="testi-avatar">👩‍💻</div>
+                    <div>
+                        <div class="testi-name">María G.</div>
+                        <div class="testi-handle">@maria_startups</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testi-card">
+                <p>La primera vez que configuré OpenClaw sentí que estaba viviendo en el futuro. Es magia pura.</p>
+                <div class="testi-author">
+                    <div class="testi-avatar">🧑‍🔬</div>
+                    <div>
+                        <div class="testi-name">Jorge L.</div>
+                        <div class="testi-handle">@jorge_cto</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testi-card">
+                <p>OpenClaw maneja mi agenda, me manda resúmenes diarios y hasta programa mis posts en redes. No sé cómo vivía sin esto.</p>
+                <div class="testi-author">
+                    <div class="testi-avatar">🎨</div>
+                    <div>
+                        <div class="testi-name">Andrea R.</div>
+                        <div class="testi-handle">@andrea_marketing</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testi-card">
+                <p>Compré un servidor solo para esto. Mi OpenClaw revisa mis servers, me avisa de problemas y hasta abre tickets solo. Increíble.</p>
+                <div class="testi-author">
+                    <div class="testi-avatar">🧑‍🚀</div>
+                    <div>
+                        <div class="testi-name">Diego F.</div>
+                        <div class="testi-handle">@diego_devops</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testi-card">
+                <p>Desde que tengo OpenClaw funcionando 24/7, mi productividad se disparó. Me maneja emails, calendarios y hasta me recuerda cosas que olvido.</p>
+                <div class="testi-author">
+                    <div class="testi-avatar">👨‍💼</div>
+                    <div>
+                        <div class="testi-name">Carlos M.</div>
+                        <div class="testi-handle">@carlos_dev</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testi-card">
+                <p>Es como tener un asistente virtual que nunca duerme. Le pido que revise mis cryptos, maneje mis tareas y siempre tiene la respuesta.</p>
+                <div class="testi-author">
+                    <div class="testi-avatar">👩‍💻</div>
+                    <div>
+                        <div class="testi-name">María G.</div>
+                        <div class="testi-handle">@maria_startups</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testi-card">
+                <p>La primera vez que configuré OpenClaw sentí que estaba viviendo en el futuro. Es magia pura.</p>
+                <div class="testi-author">
+                    <div class="testi-avatar">🧑‍🔬</div>
+                    <div>
+                        <div class="testi-name">Jorge L.</div>
+                        <div class="testi-handle">@jorge_cto</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="faq" id="faq">
+    <h2>Preguntas Frecuentes</h2>
+    <div class="faq-item">
+        <h3>¿Qué es OpenClaw?</h3>
+        <p>OpenClaw es un asistente AI de código abierto que puede controlar tu computadora, automatizar tareas y trabajar en múltiples plataformas. Es uno de los proyectos open source de más rápido crecimiento con más de 134k estrellas en GitHub.</p>
+    </div>
+    <div class="faq-item">
+        <h3>¿Necesito conocimientos técnicos?</h3>
+        <p>No. Nosotros manejamos toda la configuración técnica. Tú solo creas tu cuenta, seleccionas un plan y empiezas a usar tu OpenClaw en minutos.</p>
+    </div>
+    <div class="faq-item">
+        <h3>¿Mis datos son privados?</h3>
+        <p>Sí. Cada usuario tiene una instancia aislada. No accedemos, compartimos ni usamos tus datos para entrenar modelos.</p>
+    </div>
+    <div class="faq-item">
+        <h3>¿Puedo cancelar en cualquier momento?</h3>
+        <p>Sí. Sin contratos. Cancela cuando quieras desde tu dashboard.</p>
+    </div>
+    <div class="faq-item">
+        <h3>¿Qué pasa después de registrarme?</h3>
+        <p>Recibirás un correo con las instrucciones de acceso a tu dashboard. Tu instancia de OpenClaw estará lista en minutos.</p>
+    </div>
+</section>
+
+<section class="cta">
+    <div class="container">
+        <h2>¿Listo para tu propio<br>OpenClaw?</h2>
+        <p>Únete a miles de personas que ya viven en el futuro.</p>
+        <a href="#pricing" class="cta-btn">Comenzar ahora →</a>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <p>© 2026 OpenClaw Hosting. Todos los derechos reservados.</p>
+        <p><a href="#">Términos</a> · <a href="#">Privacidad</a> · <a href="#">Contacto</a></p>
+    </div>
+</footer>
+
+</body>
+</html>
