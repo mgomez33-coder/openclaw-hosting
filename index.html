@@ -772,18 +772,18 @@
         <h2>Precios Simples y Transparentes</h2>
         <p class="pricing-sub">Elige el plan que se ajuste a ti. Cancela cuando quieras.</p>
         <div class="billing-toggle">
-            <button class="active">Anual <span style="background:var(--accent);color:white;padding:2px 8px;border-radius:100px;font-size:0.7rem;margin-left:4px">-16%</span></button>
-            <button>Mensual</button>
+            <button class="toggle-btn active" data-period="annual">Anual <span style="background:var(--accent);color:white;padding:2px 8px;border-radius:100px;font-size:0.7rem;margin-left:4px">-16%</span></button>
+            <button class="toggle-btn" data-period="monthly">Mensual</button>
         </div>
         <div class="pricing-grid">
             <div class="price-card">
                 <h3>LITE</h3>
                 <p class="desc">Para uso personal y comenzar</p>
                 <div class="price">
-                    <span class="amount">$16</span>
+                    <span class="amount" data-annual="16" data-monthly="19">$16</span>
                     <span class="period">/mes</span>
                 </div>
-                <p class="billed">Facturado $199/año</p>
+                <p class="billed" data-annual-text="Facturado $199/año" data-monthly-text="Facturado $228/año">Facturado $199/año</p>
                 <button class="price-cta secondary">Suscribirse a Lite</button>
                 <ul class="price-features">
                     <li>Acceso instantáneo, sin configuración</li>
@@ -801,10 +801,10 @@
                 <h3>PRO</h3>
                 <p class="desc">Para usuarios avanzados que usan AI a diario</p>
                 <div class="price">
-                    <span class="amount">$33</span>
+                    <span class="amount" data-annual="33" data-monthly="39">$33</span>
                     <span class="period">/mes</span>
                 </div>
-                <p class="billed">Facturado $399/año</p>
+                <p class="billed" data-annual-text="Facturado $399/año" data-monthly-text="Facturado $468/año">Facturado $399/año</p>
                 <button class="price-cta primary">Suscribirse a Pro</button>
                 <ul class="price-features">
                     <li>Acceso instantáneo, sin configuración</li>
@@ -822,10 +822,10 @@
                 <h3>MAX</h3>
                 <p class="desc">Para cargas pesadas y máximo rendimiento</p>
                 <div class="price">
-                    <span class="amount">$66</span>
+                    <span class="amount" data-annual="66" data-monthly="79">$66</span>
                     <span class="period">/mes</span>
                 </div>
-                <p class="billed">Facturado $799/año</p>
+                <p class="billed" data-annual-text="Facturado $799/año" data-monthly-text="Facturado $948/año">Facturado $799/año</p>
                 <button class="price-cta secondary">Suscribirse a Max</button>
                 <ul class="price-features">
                     <li>Acceso instantáneo, sin configuración</li>
@@ -979,5 +979,20 @@
     </div>
 </footer>
 
+<script>
+document.querySelectorAll('.toggle-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    var period = this.getAttribute('data-period');
+    document.querySelectorAll('.toggle-btn').forEach(function(b) { b.classList.remove('active'); });
+    this.classList.add('active');
+    document.querySelectorAll('.amount').forEach(function(el) {
+      el.textContent = '$' + el.getAttribute('data-' + period);
+    });
+    document.querySelectorAll('.billed').forEach(function(el) {
+      el.textContent = el.getAttribute('data-' + period + '-text');
+    });
+  });
+});
+</script>
 </body>
 </html>
